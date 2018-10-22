@@ -1,7 +1,7 @@
 {
   "name": "devconnector-mern-stack-app",
   "version": "1.0.0",
-  "description": "Social Network for Developer - Tutorial App",
+  "description": "Social Network for Developers - Tutorial App",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -20,8 +20,10 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "gravatar": "^1.6.0",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.13",
+    "node-gravatar": "^1.0.2",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "validator": "^10.7.1"

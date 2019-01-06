@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const passport = require('passport');
 
 // Load validators
@@ -45,7 +44,6 @@ router.get(
 // @route   GET api/profile/handle/:handle
 // @desc    Get profile by handle
 // @access  Public
-
 router.get('/handle/:handle', (req, res) => {
   Profile.findOne({ handle: req.params.handle })
     .populate('user', ['name', 'avatar'])
@@ -66,7 +64,6 @@ router.get('/handle/:handle', (req, res) => {
 // @route   GET api/profile/user/:user_id
 // @desc    Get profile by user ID
 // @access  Public
-
 router.get('/user/:user_id', (req, res) => {
   Profile.findOne({ user: req.params.user_id })
     .populate('user', ['name', 'avatar'])
@@ -85,7 +82,6 @@ router.get('/user/:user_id', (req, res) => {
 // @route   GET api/profile/all
 // @desc    Get profile by user ID
 // @access  Public
-
 router.get('/all', (req, res) => {
   Profile.find()
     .populate('user', ['name', 'avatar'])
@@ -127,7 +123,6 @@ router.post(
       profileFields.githubusername = req.body.githubusername;
 
     //Skills - split into array
-
     if (typeof req.body.skills !== 'undefined') {
       profileFields.skills = req.body.skills.split(',');
     }
@@ -177,7 +172,6 @@ router.post(
 // @route   POST api/profile/experience
 // @desc    Add experience to profile
 // @access  Private
-
 router.post(
   '/experience',
   passport.authenticate('jwt', { session: false }),
@@ -213,7 +207,6 @@ router.post(
 // @route   POST api/profile/education
 // @desc    Add education to profile
 // @access  Private
-
 router.post(
   '/education',
   passport.authenticate('jwt', { session: false }),
@@ -249,7 +242,6 @@ router.post(
 // @route   DELETE api/profile/experience/:experience_id
 // @desc    Add education to profile
 // @access  Private
-
 router.delete(
   '/experience/:experience_id',
   passport.authenticate('jwt', { session: false }),
@@ -272,7 +264,6 @@ router.delete(
 // @route   DELETE api/profile/education/:education_id
 // @desc    Add education to profile
 // @access  Private
-
 router.delete(
   '/education/:education_id',
   passport.authenticate('jwt', { session: false }),
@@ -297,7 +288,6 @@ router.delete(
 // @route   DELETE api/profile
 // @desc    Delete user and profile
 // @access  Private
-
 router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),

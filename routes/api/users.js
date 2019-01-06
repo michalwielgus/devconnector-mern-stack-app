@@ -1,12 +1,14 @@
 const express = require('express');
 const gravatar = require('gravatar');
 const brcypt = require('bcryptjs');
-const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+
 const key = require('../../config/keys').secretOrKey;
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+
+const User = require('../../models/User');
 
 const router = express.Router();
 

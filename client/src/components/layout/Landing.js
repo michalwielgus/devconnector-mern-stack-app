@@ -8,6 +8,8 @@ class Landing extends Component {
     if (props.auth.isAuthenticated) {
       props.history.push('/dashboard');
     }
+
+    return null;
   }
 
   render() {

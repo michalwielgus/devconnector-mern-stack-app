@@ -7,6 +7,7 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import { createProfile } from "../../actions/profileActions";
+import clearErrors from "../../actions/clearErrorsAction";
 
 class CreateProfile extends Component {
   constructor() {
@@ -35,6 +36,9 @@ class CreateProfile extends Component {
       this
     );
   }
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
 
   static getDerivedStateFromProps(props) {
     if (props.errors) {
@@ -53,7 +57,7 @@ class CreateProfile extends Component {
       website: this.state.website,
       location: this.state.location,
       status: this.state.status,
-      skills: this.state.skills,
+      skills: this.state.skills.replace(/\s/g, ""),
       bio: this.state.bio,
       githubusername: this.state.githubusername,
       social: {
@@ -244,6 +248,8 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -254,5 +260,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { createProfile }
+  { createProfile, clearErrors }
 )(withRouter(CreateProfile));

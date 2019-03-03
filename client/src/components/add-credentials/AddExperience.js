@@ -5,6 +5,7 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addExperience } from "../../actions/profileActions";
+import clearErrors from "../../actions/clearErrorsAction";
 
 class AddExperience extends Component {
   constructor(props) {
@@ -24,6 +25,10 @@ class AddExperience extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onCheck = this.onCheck.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   static getDerivedStateFromProps(props) {
@@ -158,9 +163,10 @@ class AddExperience extends Component {
 }
 
 addExperience.propTypes = {
+  addExperience: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-  addExperience: PropTypes.func.isRequired
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -170,5 +176,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addExperience }
+  { addExperience, clearErrors }
 )(withRouter(AddExperience));

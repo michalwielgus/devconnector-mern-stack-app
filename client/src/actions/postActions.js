@@ -1,14 +1,13 @@
 import axios from "axios";
+import clearErrors from "./clearErrorsAction";
 
 import {
   ADD_POST,
   GET_ERRORS,
-  CLEAR_ERRORS,
   GET_POSTS,
   GET_POST,
   DELETE_POST,
-  POST_LOADING,
-  CLEAR_CURRENT_PROFILE
+  POST_LOADING
 } from "./types";
 
 // Add post
@@ -70,7 +69,6 @@ export const getPost = id => dispatch => {
 
 // Delete post
 export const deletePost = id => dispatch => {
-  dispatch(setPostLoading());
   axios
     .delete(`/api/posts/${id}`)
     .then(res => {
@@ -100,8 +98,8 @@ export const addLike = id => dispatch => {
     );
 };
 
-// Remove Like
-export const removeLike = id => dispatch => {
+// Delete Like
+export const deleteLike = id => dispatch => {
   axios
     .post(`/api/posts/unlike/${id}`)
     .then(res => dispatch(getPosts()))
@@ -153,12 +151,5 @@ export const deleteComment = (postId, commentId) => dispatch => {
 export const setPostLoading = () => {
   return {
     type: POST_LOADING
-  };
-};
-
-// Set loading state
-export const clearErrors = () => {
-  return {
-    type: CLEAR_ERRORS
   };
 };

@@ -7,6 +7,7 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
+import clearErrors from "../../actions/clearErrorsAction";
 import isEmpty from "../../validation/is-empty";
 
 class CreateProfile extends Component {
@@ -35,6 +36,10 @@ class CreateProfile extends Component {
     this.toggleSocialInputsVisibility = this.toggleSocialInputsVisibility.bind(
       this
     );
+  }
+
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   static getDerivedStateFromProps(props, prevState) {
@@ -303,10 +308,11 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-  profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired
+  getCurrentProfile: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -315,5 +321,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { createProfile, getCurrentProfile }
+  { createProfile, getCurrentProfile, clearErrors }
 )(withRouter(CreateProfile));

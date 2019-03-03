@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { addPost } from "../../actions/postActions";
+import clearErrors from "../../actions/clearErrorsAction";
 
 class PostForm extends Component {
   constructor(props) {
@@ -13,6 +14,10 @@ class PostForm extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   static getDerivedStateFromProps(props) {
@@ -76,6 +81,7 @@ class PostForm extends Component {
 
 PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -87,5 +93,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addPost }
+  { addPost, clearErrors }
 )(PostForm);
